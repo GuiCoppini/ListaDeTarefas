@@ -2,21 +2,25 @@ package EstudandoJS.model;
 
 import org.hibernate.validator.constraints.NotBlank;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
 import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Set;
 
 @Entity
 public class ListaDeTarefas {
 
-    @OneToMany(mappedBy = "listaDeTarefas")
-    private Set<Tarefa> tarefas = new HashSet<>();
+    @OneToMany(mappedBy = "listaDeTarefas", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private List<Tarefa> tarefas = new LinkedList<>();
 
     @NotNull
     @NotBlank
@@ -43,11 +47,11 @@ public class ListaDeTarefas {
 
     }
 
-    public Set<Tarefa> getTarefas() {
+    public List<Tarefa> getTarefas() {
         return tarefas;
     }
 
-    public ListaDeTarefas setTarefas(Set<Tarefa> tarefas) {
+    public ListaDeTarefas setTarefas(List<Tarefa> tarefas) {
         this.tarefas = tarefas;
         return this;
     }

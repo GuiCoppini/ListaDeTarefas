@@ -1,5 +1,7 @@
 package EstudandoJS.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -25,7 +27,8 @@ public class Tarefa {
 
     private int prioridade;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
+    @JsonIgnore
     @JoinColumn(name = "ID_LISTA_DE_TAREFAS")
     private ListaDeTarefas listaDeTarefas;
 

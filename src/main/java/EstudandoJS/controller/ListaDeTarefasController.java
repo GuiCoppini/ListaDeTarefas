@@ -25,7 +25,7 @@ public class ListaDeTarefasController {
         return listaDeTarefasRepository.findAll();
     }
 
-    @PostMapping("/")
+    @PostMapping("/new")
     public ListaDeTarefas insereLista(@Valid @RequestBody ListaDeTarefas listaDeTarefas) {
         return listaDeTarefasRepository.save(listaDeTarefas);
     }
