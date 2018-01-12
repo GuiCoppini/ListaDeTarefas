@@ -12,15 +12,15 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
 import java.util.List;
 
 @RestController
+@RequestMapping("tarefas/")
 public class TarefaController {
 
     // TODO COLOCAR METODOS EM SERVICES
@@ -31,24 +31,24 @@ public class TarefaController {
     @Autowired
     private ListaDeTarefasRepository listaDeTarefasRepository;
 
-    @GetMapping("tarefas/")
+    @GetMapping("/")
     public List<Tarefa> todasTarefas() {
         return tarefaRepository.findAll();
     }
 
-    @GetMapping("tarefas/{id}")
+    @GetMapping("/{id}")
     public Tarefa achaTarefa(@PathVariable("id") Long id) {
         return tarefaRepository.findOne(id);
     }
 
-    @PostMapping("tarefas/new")
+    @PostMapping("/new")
     public Tarefa insereTarefaAvulsa(@Valid @RequestBody Tarefa tarefa) {
         tarefa.setListaDeTarefas(null);
         return tarefaRepository.save(tarefa);
     }
 
 
-    @DeleteMapping("tarefas/{idTarefa}/delete")
+    @DeleteMapping("/{idTarefa}/delete")
     public void deletaTarefa(@PathVariable("idTarefa") Long idTarefa) {
         Tarefa t = tarefaRepository.findOne(idTarefa);
         if(null == t) {
@@ -60,7 +60,7 @@ public class TarefaController {
 
     }
 
-    @PatchMapping("tarefas/{id}/status")
+    @PatchMapping("/{id}/status")
     public void settaStatusDaTarefa(@Valid @RequestBody ChangeStatusRequest request,
                                     @PathVariable("id") Long id) {
         Tarefa existente = tarefaRepository.findOne(id);
@@ -74,7 +74,7 @@ public class TarefaController {
     }
 
     // Atribui a uma lista
-    @PatchMapping("tarefas/{id}/lista")
+    @PatchMapping("/{id}/lista")
     public void atribuiLista(@PathVariable("id") Long id,
                                        @Valid @RequestBody AtribuiListaRequest request) {
         Tarefa existente = tarefaRepository.findOne(id);
@@ -91,7 +91,7 @@ public class TarefaController {
         tarefaRepository.save(existente);
     }
 
-    @GetMapping("tarefas/semlista")
+    @GetMapping("/semlista")
     public List<Tarefa> tarefasSemLista() {
         return tarefaRepository.findAllWithoutListaDeTarefas();
     }
