@@ -1,7 +1,9 @@
 package EstudandoJS.controller;
 
 import EstudandoJS.model.ListaDeTarefas;
+import EstudandoJS.model.Tarefa;
 import EstudandoJS.repository.ListaDeTarefasRepository;
+import EstudandoJS.repository.TarefaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,6 +18,11 @@ import java.util.List;
 @RestController
 @RequestMapping("/listadetarefas/*")
 public class ListaDeTarefasController {
+
+    // TODO COLOCAR METODOS EM SERVICES
+
+    @Autowired
+    private TarefaRepository tarefaRepository;
 
     @Autowired
     private ListaDeTarefasRepository listaDeTarefasRepository;
@@ -35,4 +42,13 @@ public class ListaDeTarefasController {
         return listaDeTarefasRepository.findOne(id);
     }
 
+    @PostMapping("/{id}/new")
+    public Tarefa insereTarefa(@PathVariable("id") Long idLista,
+                               @Valid @RequestBody Tarefa tarefa) {
+
+        ListaDeTarefas lista = listaDeTarefasRepository.findOne(idLista);
+        lista.add(tarefa);
+        tarefa.setListaDeTarefas(lista);
+        return tarefaRepository.save(tarefa);
+    }
 }

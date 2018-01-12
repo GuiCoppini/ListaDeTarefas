@@ -10,6 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import java.util.Arrays;
 
 @Entity
 public class Tarefa {
@@ -32,13 +33,19 @@ public class Tarefa {
     @JoinColumn(name = "ID_LISTA_DE_TAREFAS")
     private ListaDeTarefas listaDeTarefas;
 
-    enum Status {
+    public enum Status {
         FEITO("feito"),
         PENDENTE("pendente"),
         CANCELADO("cancelado");
 
         private String status;
 
+        public static Status fromString(String status) {
+            return Arrays.stream(Status.values())
+                    .filter(b -> b.status.equals(status))
+                    .findFirst()
+                    .orElse(null);
+        }
 
         Status(String status) {
             this.status = status;
