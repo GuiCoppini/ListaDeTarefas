@@ -10,6 +10,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import java.util.HashSet;
 import java.util.LinkedList;
@@ -17,6 +18,7 @@ import java.util.List;
 import java.util.Set;
 
 @Entity
+@Table(name = "LISTA_DE_TAREFAS")
 public class ListaDeTarefas {
 
     @OneToMany(mappedBy = "listaDeTarefas", cascade = CascadeType.ALL, fetch = FetchType.EAGER)

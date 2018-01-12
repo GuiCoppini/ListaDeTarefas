@@ -90,4 +90,9 @@ public class TarefaController {
 
         tarefaRepository.save(existente);
     }
+
+    @GetMapping("tarefas/semlista")
+    public List<Tarefa> tarefasSemLista() {
+        return tarefaRepository.findAllWithoutListaDeTarefas();
+    }
 }

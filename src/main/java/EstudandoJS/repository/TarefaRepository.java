@@ -16,8 +16,6 @@ public interface TarefaRepository extends JpaRepository<Tarefa, Long> {
 
     Tarefa findOne(Long id);
 
-//    @Transactional
-//    @Modifying
-//    @Query("DELETE FROM Tarefa where id_lista_de_tarefas = :idLista AND id_tarefa = :idTarefa")
-//    void deleteByLista(@Param(value = "idLista") Long idLista, @Param(value = "idTarefa") Long idTarefa);
+    @Query("SELECT t from Tarefa t WHERE t.listaDeTarefas = null")
+    List<Tarefa> findAllWithoutListaDeTarefas();
 }
