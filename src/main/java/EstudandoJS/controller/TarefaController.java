@@ -6,6 +6,7 @@ import EstudandoJS.model.ListaDeTarefas;
 import EstudandoJS.model.Tarefa;
 import EstudandoJS.repository.ListaDeTarefasRepository;
 import EstudandoJS.repository.TarefaRepository;
+import EstudandoJS.service.TarefaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -22,79 +23,47 @@ import java.util.List;
 
 @RestController
 @RequestMapping("tarefas/")
-@CrossOrigin(origins = "127.0.0.1:3000")
 public class TarefaController {
 
-    // TODO COLOCAR METODOS EM SERVICES
-
     @Autowired
-    private TarefaRepository tarefaRepository;
-
-    @Autowired
-    private ListaDeTarefasRepository listaDeTarefasRepository;
+    private TarefaService tarefaService;
 
     @GetMapping("/")
     public List<Tarefa> todasTarefas() {
-        return tarefaRepository.findAll();
+        return tarefaService.findAll();
     }
 
     @GetMapping("/{id}")
     public Tarefa achaTarefa(@PathVariable("id") Long id) {
-        return tarefaRepository.findOne(id);
+        return tarefaService.search(id);
     }
 
     @PostMapping("/new")
     public Tarefa insereTarefaAvulsa(@Valid @RequestBody Tarefa tarefa) {
-        tarefa.setListaDeTarefas(null);
-        return tarefaRepository.save(tarefa);
+        return tarefaService.criaTarefa(tarefa);
     }
 
 
     @DeleteMapping("/{idTarefa}/delete")
     public void deletaTarefa(@PathVariable("idTarefa") Long idTarefa) {
-        Tarefa t = tarefaRepository.findOne(idTarefa);
-        if(null == t) {
-            throw new RuntimeException(String.format("A tarefa de ID: %s nao existe", idTarefa));
-        }
-        t.setListaDeTarefas(null);
-
-        tarefaRepository.delete(idTarefa);
-
+        tarefaService.deletaTarefa(idTarefa);
     }
 
     @PatchMapping("/{id}/status")
     public void settaStatusDaTarefa(@Valid @RequestBody ChangeStatusRequest request,
                                     @PathVariable("id") Long id) {
-        Tarefa existente = tarefaRepository.findOne(id);
-
-        if(null == existente)
-            throw new RuntimeException(String.format("Tarefa de id=%s nao encontrada", id));
-
-        existente.setStatus(Tarefa.Status.fromString(request.getStatus()));
-
-        tarefaRepository.save(existente);
+        tarefaService.settaStatus(request, id);
     }
 
     // Atribui a uma lista
     @PatchMapping("/{id}/lista")
     public void atribuiLista(@PathVariable("id") Long id,
                                        @Valid @RequestBody AtribuiListaRequest request) {
-        Tarefa existente = tarefaRepository.findOne(id);
-        if(null == existente)
-            throw new RuntimeException(String.format("Tarefa de id=%s nao encontrada", id));
-
-        Long idLista = request.getIdLista();
-        ListaDeTarefas lista = listaDeTarefasRepository.findOne(idLista);
-        if(null == lista)
-            throw new RuntimeException(String.format("Lista de Tarefas de id=%s nao encontrada", idLista));
-
-        existente.setListaDeTarefas(lista);
-
-        tarefaRepository.save(existente);
+        tarefaService.settaLista(request, id);
     }
 
     @GetMapping("/semlista")
     public List<Tarefa> tarefasSemLista() {
-        return tarefaRepository.findAllWithoutListaDeTarefas();
+        return tarefaService.todasSemLista();
     }
 }
