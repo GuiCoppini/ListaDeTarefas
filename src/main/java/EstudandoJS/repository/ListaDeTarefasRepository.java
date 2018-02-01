@@ -1,7 +1,6 @@
 package EstudandoJS.repository;
 
 import EstudandoJS.model.ListaDeTarefas;
-import EstudandoJS.model.Tarefa;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
