@@ -10,13 +10,13 @@ public class FrontController {
 
     @RequestMapping(value = "/aaa", method = RequestMethod.GET)
     public String asqwhe() {
-        System.out.println("AAAAAAAA");
-        return "test.html";
+        System.out.println("AAAAAAAAawewa");
+        return "test";
     }
 
     @RequestMapping(value = "/bbb", method = RequestMethod.GET)
     public ModelAndView asd() {
-        ModelAndView mv = new ModelAndView("test");
+        ModelAndView mv = new ModelAndView("test.html");
         return mv;
     }
 }
