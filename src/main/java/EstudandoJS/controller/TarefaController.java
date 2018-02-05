@@ -5,6 +5,7 @@ import EstudandoJS.model.ChangeStatusRequest;
 import EstudandoJS.model.Tarefa;
 import EstudandoJS.service.TarefaService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
@@ -34,7 +35,7 @@ public class TarefaController {
         return tarefaService.search(id);
     }
 
-    @PostMapping("/new")
+    @PostMapping(value = "/new", consumes = MediaType.APPLICATION_JSON_VALUE)
     public Tarefa insereTarefaAvulsa(@Valid @RequestBody Tarefa tarefa) {
         return tarefaService.criaTarefa(tarefa);
     }
