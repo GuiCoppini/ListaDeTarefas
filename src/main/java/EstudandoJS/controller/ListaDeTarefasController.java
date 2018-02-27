@@ -1,10 +1,15 @@
 package EstudandoJS.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+import javax.validation.Valid;
+
 import EstudandoJS.model.ListaDeTarefas;
 import EstudandoJS.model.Tarefa;
 import EstudandoJS.repository.ListaDeTarefasRepository;
 import EstudandoJS.repository.TarefaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -12,14 +17,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.validation.Valid;
-import java.util.List;
-
 @RestController
+@CrossOrigin
 @RequestMapping("/listadetarefas/*")
 public class ListaDeTarefasController {
-
-    // TODO COLOCAR METODOS EM SERVICES
 
     @Autowired
     private TarefaRepository tarefaRepository;
@@ -27,8 +28,22 @@ public class ListaDeTarefasController {
     @Autowired
     private ListaDeTarefasRepository listaDeTarefasRepository;
 
+    int counter = 0;
+
     @GetMapping("/")
     public List<ListaDeTarefas> todasAsListas() {
+        ListaDeTarefas l = new ListaDeTarefas();
+        l.setTitulo("Listona" + counter);
+        Tarefa t = new Tarefa("tarefa" + counter, "desc" + counter, counter);
+        counter++;
+        ArrayList<Tarefa> tarefas = new ArrayList<>();
+        tarefas.add(t);
+        l.setTarefas(tarefas);
+        t.setListaDeTarefas(l);
+
+        listaDeTarefasRepository.save(l);
+        tarefaRepository.save(t);
+
         return listaDeTarefasRepository.findAll();
     }
 
@@ -43,8 +58,8 @@ public class ListaDeTarefasController {
     }
 
     @PostMapping("/{id}/new")
-    public Tarefa insereTarefa(@PathVariable("id") Long idLista,
-                               @Valid @RequestBody Tarefa tarefa) {
+    public Tarefa insereTarefa(
+            @PathVariable("id") Long idLista, @Valid @RequestBody Tarefa tarefa) {
 
         ListaDeTarefas lista = listaDeTarefasRepository.findOne(idLista);
         lista.add(tarefa);
