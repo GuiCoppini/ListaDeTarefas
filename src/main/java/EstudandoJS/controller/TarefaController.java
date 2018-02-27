@@ -35,7 +35,7 @@ public class TarefaController {
         return tarefaService.search(id);
     }
 
-    @PostMapping(value = "/new", consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping("/new")
     public Tarefa insereTarefaAvulsa(@Valid @RequestBody Tarefa tarefa) {
         return tarefaService.criaTarefa(tarefa);
     }
