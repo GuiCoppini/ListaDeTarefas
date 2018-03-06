@@ -12,8 +12,8 @@ export default class ListaDeTarefas extends React.Component {
 	componentDidMount() {
     APIservice.getListas().then(data => {
         let listas = data;
-        return listas;
         alert('data = ' + listas)
+        return listas;
       })
 	}
 
