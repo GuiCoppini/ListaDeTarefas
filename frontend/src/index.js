@@ -1,9 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-// import App from './App';
-import ListaDeTarefas from './ListaDeTarefas';
+import ReactRouter from './ReactRouter';
 import registerServiceWorker from './registerServiceWorker';
 
-ReactDOM.render(<ListaDeTarefas />, document.getElementById('root'));
 registerServiceWorker();
+
+ReactDOM.render(<ReactRouter />,document.getElementById('root')
+);

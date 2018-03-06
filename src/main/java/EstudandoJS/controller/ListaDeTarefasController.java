@@ -1,6 +1,5 @@
 package EstudandoJS.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 import javax.validation.Valid;
 
@@ -32,18 +31,6 @@ public class ListaDeTarefasController {
 
     @GetMapping("/")
     public List<ListaDeTarefas> todasAsListas() {
-        ListaDeTarefas l = new ListaDeTarefas();
-        l.setTitulo("Listona" + counter);
-        Tarefa t = new Tarefa("tarefa" + counter, "desc" + counter, counter);
-        counter++;
-        ArrayList<Tarefa> tarefas = new ArrayList<>();
-        tarefas.add(t);
-        l.setTarefas(tarefas);
-        t.setListaDeTarefas(l);
-
-        listaDeTarefasRepository.save(l);
-        tarefaRepository.save(t);
-
         return listaDeTarefasRepository.findAll();
     }
 

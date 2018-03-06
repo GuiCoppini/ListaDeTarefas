@@ -1,5 +1,10 @@
 package EstudandoJS;
 
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.stream.Stream;
+
 import EstudandoJS.repository.ListaDeTarefasRepository;
 import EstudandoJS.repository.TarefaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +20,4 @@ public class EstudandoJsApplication {
     @Autowired
     ListaDeTarefasRepository listaDeTarefasRepository;
 
-    public static void main(String[] args) {
-        SpringApplication.run(EstudandoJsApplication.class, args);
-    }
 }

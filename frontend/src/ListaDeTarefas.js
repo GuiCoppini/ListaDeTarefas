@@ -1,6 +1,7 @@
 import React from 'react';
+import * as APIservice from './APIservice'
 
-export default class ListaDeTarefas extends React.Component {   
+export default class ListaDeTarefas extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -9,22 +10,34 @@ export default class ListaDeTarefas extends React.Component {
   }
 
 	componentDidMount() {
-		fetch('http://localhost:8080/listadetarefas/')
-	    .then(results => {
-	    	return results.json();
-	    }).then(data => {
-	    	let listas = data;
-	    	this.setState({lista_de_tarefas: listas})
-	    	console.log(data)
-	    })
+    APIservice.getListas().then(data => {
+        let listas = data;
+        return listas;
+        alert('data = ' + listas)
+      })
+	}
+
+	renderTarefa(lista) {
+		lista.map((tarefa) => {
+			return (
+  				<li key={tarefa.id}> {tarefa.titulo} {tarefa.prioridade}</li>
+  			);
+  		});
 	}
 
   render() {
   	const data = this.state.lista_de_tarefas;
-  	const listItems = data.map((d) => 
-  		<li key={d.titulo}> {d.titulo}</li>);
-  	return (
-        <div>{ listItems }</div>
-    );
+
+  	return data.map(lista =>
+  			<div>
+	  			Lista: {lista.titulo} Tamanho: {lista.tarefas.length}
+	  			<ul>
+	  				{
+              lista.tarefas.map(tarefa =>
+                <li> { tarefa.titulo } </li> )
+	  				}
+	  			</ul>
+  			</div>
+  	);
   }
 }
