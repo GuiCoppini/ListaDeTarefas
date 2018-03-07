@@ -1,8 +1,21 @@
+import axios from 'axios';
+
+const api = axios.create({
+  baseURL: 'http://localhost:8080'
+});
+
 export function getListas() {
-  return fetch('http://localhost:8080/listadetarefas/')
-      .then(results => {
-        return results.json();
-      })
+  return api.get('/listadetarefas/')
+    .then(results => {
+      return results.data;
+    })
+}
+
+export function getLista(id) {
+  return api.get('/listadetarefas/'+id)
+    .then(results => {
+      return results.data;
+    })
 }
 
 export function postLista(lista) {

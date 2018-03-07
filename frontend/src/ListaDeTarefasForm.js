@@ -15,8 +15,8 @@ export default class ListaDeTarefasForm extends React.Component {
   }
 
   handleSubmit(event) {
-    APIservice.postLista(this.state);
     event.preventDefault();
+    APIservice.postLista(this.state);
   }
 
   render() {

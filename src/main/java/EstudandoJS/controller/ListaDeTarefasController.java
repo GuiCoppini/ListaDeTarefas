@@ -49,7 +49,6 @@ public class ListaDeTarefasController {
             @PathVariable("id") Long idLista, @Valid @RequestBody Tarefa tarefa) {
 
         ListaDeTarefas lista = listaDeTarefasRepository.findOne(idLista);
-        lista.add(tarefa);
         tarefa.setListaDeTarefas(lista);
         return tarefaRepository.save(tarefa);
     }
