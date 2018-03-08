@@ -27,13 +27,23 @@ export function getTarefa(id) {
 }
 
 export function postLista(lista) {
-    alert('A name was submitted: ' + JSON.stringify(lista));
-    fetch('http://localhost:8080/listadetarefas/new', {
-      method: 'POST',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(lista)
+    api.post('/listadetarefas/new',
+      lista
+    ).then(function (response) {
+      console.log(response);
+    }).catch(function (error) {
+      console.log(error);
     })
 }
+
+export function postTarefa(taskListId, tarefa) {
+    console.log(JSON.stringify(tarefa))
+    api.post(`/listadetarefas/${taskListId}/new`,
+      tarefa
+    ).then(function (response) {
+      console.log(response);
+    }).catch(function (error) {
+      console.log(error);
+    })
+}
+
