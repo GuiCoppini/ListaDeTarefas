@@ -27,8 +27,6 @@ public class ListaDeTarefasController {
     @Autowired
     private ListaDeTarefasRepository listaDeTarefasRepository;
 
-    int counter = 0;
-
     @GetMapping("/")
     public List<ListaDeTarefas> todasAsListas() {
         return listaDeTarefasRepository.findAll();
@@ -49,6 +47,9 @@ public class ListaDeTarefasController {
             @PathVariable("id") Long idLista, @Valid @RequestBody Tarefa tarefa) {
 
         ListaDeTarefas lista = listaDeTarefasRepository.findOne(idLista);
+        if(lista == null) {
+            throw new RuntimeException("Lista nao encontrada!");
+        }
         tarefa.setListaDeTarefas(lista);
         return tarefaRepository.save(tarefa);
     }

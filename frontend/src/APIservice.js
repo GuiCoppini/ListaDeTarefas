@@ -18,6 +18,14 @@ export function getLista(id) {
     })
 }
 
+export function getTarefa(id) {
+  return api.get('/tarefas/'+id)
+    .then(results => {
+      console.log(results)
+      return results.data;
+    })
+}
+
 export function postLista(lista) {
     alert('A name was submitted: ' + JSON.stringify(lista));
     fetch('http://localhost:8080/listadetarefas/new', {
