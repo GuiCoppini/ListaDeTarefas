@@ -32,13 +32,13 @@ export default class TaskListDetail extends React.Component {
           {
             lista.tarefas.map(tarefa =>
               <li key={tarefa.id}>Titulo: {tarefa.titulo} <br/>
-              <Link to={`/lista/${lista.id}/${tarefa.id}`}>Ver Tarefa</Link> <br/><br/>
+              <Link to={`/listas/${lista.id}/${tarefa.id}`}>Ver Tarefa</Link> <br/><br/>
               </li>
             )
           }
         </ul>
         <br/><br/>
-        <Link to={`/lista/${lista.id}/new`}>Nova Tarefa</Link> <br/><br/>
+        <Link to={`/listas/${lista.id}/new`}>Nova Tarefa</Link> <br/><br/>
       </div>
   }
 }
