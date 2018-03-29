@@ -11,11 +11,11 @@ export default class ReactRouter extends React.Component {
     return (
       <Router>
           <Switch>
-            <Route name="task_list_form" exact path="/lista_form" component={TaskListForm} />
-            <Route name="task_list_pack" exact path="/get_listas" component={TaskListPack} />
-            <Route name="task_list_detail" exact path="/lista/:id" component={TaskListDetail} />
-            <Route name="task_form" exact path="/lista/:idLista/new" component={TaskForm} />
-            <Route name="task_detail" exact path="/lista/:idLista/:idTarefa" component={TaskDetail} />
+            <Route name="task_list_form" exact path="/listas/new" component={TaskListForm} />
+            <Route name="task_list_pack" exact path="/listas" component={TaskListPack} />
+            <Route name="task_list_detail" exact path="/listas/:id" component={TaskListDetail} />
+            <Route name="task_form" exact path="/listas/:idLista/new" component={TaskForm} />
+            <Route name="task_detail" exact path="/listas/:idLista/:idTarefa" component={TaskDetail} />
           </Switch>
       </Router>
       )
