@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom'
 import * as APIservice from './APIservice'
+import 'bootstrap/dist/css/bootstrap.css';
 
 export default class TaskListPack extends React.Component {
   constructor(props) {
@@ -16,20 +17,39 @@ export default class TaskListPack extends React.Component {
     })
 	}
 
+
+
   render() {
   	const data = this.state.task_list_pack;
 
-  	return data.map(lista =>
-  			<div>
-          <dl>
-            <dt>Lista:</dt>
-            <dd>{lista.titulo}</dd>
-            <dt>Tamanho:</dt>
-            <dd>{lista.tarefas.length}</dd>
-          </dl>
-          <Link to={'/lista/' + lista.id}>Ver Lista</Link> <br/><br/>
-
-  			</div>
-  	);
+      return (
+        <div>
+          <table className="table table-striped">
+            <thead>
+              <tr>
+                <th>Titulo</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              {mapListas(data)}
+            </tbody>
+          </table>
+        </div>
+      )
   }
 }
+  function mapListas(listas) {
+    return listas.map(lista =>
+              <tr>
+                <td>{lista.titulo}</td>
+
+                <td>
+                  <Link to={'/listas/' + lista.id}>
+                    <button class="btn btn-success">Ver Lista</button>
+                  </Link>
+                </td>
+
+              </tr>
+             );
+  }
