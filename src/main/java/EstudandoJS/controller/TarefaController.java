@@ -1,11 +1,13 @@
 package EstudandoJS.controller;
 
+import java.util.List;
+import javax.validation.Valid;
+
 import EstudandoJS.model.AtribuiListaRequest;
 import EstudandoJS.model.ChangeStatusRequest;
 import EstudandoJS.model.Tarefa;
 import EstudandoJS.service.TarefaService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,12 +18,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.validation.Valid;
-import java.util.List;
-
 @RestController
 @CrossOrigin
-@RequestMapping("tarefas/")
+@RequestMapping("api/tarefas/")
 public class TarefaController {
 
     @Autowired
@@ -42,22 +41,21 @@ public class TarefaController {
         return tarefaService.criaTarefa(tarefa);
     }
 
-
     @DeleteMapping("/{idTarefa}/delete")
     public void deletaTarefa(@PathVariable("idTarefa") Long idTarefa) {
         tarefaService.deletaTarefa(idTarefa);
     }
 
     @PatchMapping("/{id}/status")
-    public void settaStatusDaTarefa(@Valid @RequestBody ChangeStatusRequest request,
-                                    @PathVariable("id") Long id) {
+    public void settaStatusDaTarefa(
+            @Valid @RequestBody ChangeStatusRequest request, @PathVariable("id") Long id) {
         tarefaService.settaStatus(request, id);
     }
 
     // Atribui a uma lista
     @PatchMapping("/{id}/lista")
-    public void atribuiLista(@PathVariable("id") Long id,
-                                       @Valid @RequestBody AtribuiListaRequest request) {
+    public void atribuiLista(
+            @PathVariable("id") Long id, @Valid @RequestBody AtribuiListaRequest request) {
         tarefaService.settaLista(request, id);
     }
 

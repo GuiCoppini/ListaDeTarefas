@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @CrossOrigin
-@RequestMapping("/listadetarefas/*")
+@RequestMapping("api/listadetarefas/*")
 public class ListaDeTarefasController {
 
     @Autowired
