@@ -7,12 +7,12 @@ export default class NavBarComponent extends React.Component {
       <Navbar>
         <Navbar.Header>
           <Navbar.Brand>
-            React-Bootstrap
+            ListaDeTarefas
           </Navbar.Brand>
         </Navbar.Header>
-        <Nav stacked={false}>
-          <NavItem eventKey={1} href="#">
-            Link1
+        <Nav>
+          <NavItem eventKey={1} href="/listas/new">
+            Nova Lista de Tarefas
           </NavItem>
           <NavItem eventKey={2} href="#">
             Link2

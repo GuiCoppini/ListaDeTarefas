@@ -16,17 +16,21 @@ export default class TaskListForm extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    APIservice.postLista(this.state);
+    APIservice.postLista(this.state, this.doOnError);
+  }
+
+  doOnError(error) {
+    console.log(error)
   }
 
   render() {
     return (
-      <form onSubmit={this.handleSubmit}>
-        <label>
-          List Name:
-          <input type="text" value={this.state.titulo} onChange={this.handleChange} />
-        </label>
-        <input type="submit" value="Cria saporra" />
+      <form className="form-inline" onSubmit={this.handleSubmit}>
+        <div className="form-group">
+          <label>Título: </label>
+          <input type="text" onChange={this.handleChange} className="form-control" id="titulo"></input>
+        </div>
+        <button type="submit" className="btn btn-success">Cria lista</button>
       </form>
     );
   }

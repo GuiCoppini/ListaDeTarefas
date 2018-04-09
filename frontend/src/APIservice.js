@@ -26,14 +26,12 @@ export function getTarefa(id) {
     })
 }
 
-export function postLista(lista) {
-    api.post('/listadetarefas/new',
+export function postLista(lista, handleError) {
+    return api.post('/listadetarefas/new',
       lista
     ).then(function (response) {
       console.log(response);
-    }).catch(function (error) {
-      console.log(error);
-    })
+    }).catch(handleError)
 }
 
 export function postTarefa(taskListId, tarefa) {
