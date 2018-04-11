@@ -27,8 +27,6 @@ export default class TaskListForm extends React.Component {
 
   doOnSuccess(response) {
     alert('sussa');
-    console.log(this.state);
-    this.props.history.push("/");
     // return <Redirect to="/listas" />
   }
 
