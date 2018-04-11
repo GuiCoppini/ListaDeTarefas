@@ -28,6 +28,7 @@ export default class TaskListPack extends React.Component {
             <thead>
               <tr>
                 <th>Titulo</th>
+                <th>Tarefas</th>
                 <th>Action</th>
               </tr>
             </thead>
@@ -43,6 +44,7 @@ export default class TaskListPack extends React.Component {
     return listas.map(lista =>
               <tr>
                 <td>{lista.titulo}</td>
+                <td>{lista.tarefas.length}</td>
 
                 <td>
                   <Link to={'/listas/' + lista.id}>

@@ -23,17 +23,16 @@ export default class TaskListDetail extends React.Component {
   render() {
     const lista = this.state;
 
-      return <div>
-          ID: {lista.id} <br/>
-          Titulo: {lista.titulo} <br/>
-          Tamanho: {lista.tarefas.length} <br/>
-          Tarefas:
+      return <div align="center">
+          <h2> Titulo: {lista.titulo} </h2>
+          <h3> Tamanho: {lista.tarefas.length} </h3>
+          {lista.tarefas.length > 0 ? 'Tarefas:' : 'A lista nao possui tarefas.'}
         <ul>
           {
             lista.tarefas.map(tarefa =>
-              <li key={tarefa.id}>Titulo: {tarefa.titulo} <br/>
-              <Link to={`/listas/${lista.id}/${tarefa.id}`}>Ver Tarefa</Link> <br/><br/>
-              </li>
+                  <li key={tarefa.id}>Titulo: {tarefa.titulo} <br/>
+                    <Link to={`/listas/${lista.id}/${tarefa.id}`}>Ver Tarefa</Link> <br/><br/>
+                  </li>
             )
           }
         </ul>
@@ -41,4 +40,5 @@ export default class TaskListDetail extends React.Component {
         <Link to={`/listas/${lista.id}/new`}>Nova Tarefa</Link> <br/><br/>
       </div>
   }
+
 }

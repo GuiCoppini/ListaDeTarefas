@@ -1,4 +1,5 @@
 import React from 'react';
+import { Redirect, withRouter } from 'react-router';
 import * as APIservice from './APIservice'
 
 export default class TaskListForm extends React.Component {
@@ -16,11 +17,19 @@ export default class TaskListForm extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    APIservice.postLista(this.state, this.doOnError);
+    APIservice.postLista(this.state, this.doOnSuccess, this.doOnError);
   }
 
   doOnError(error) {
-    console.log(error)
+    alert('deu erro');
+    console.log(error);
+  }
+
+  doOnSuccess(response) {
+    alert('sussa');
+    console.log(this.state);
+    this.props.history.push("/");
+    // return <Redirect to="/listas" />
   }
 
   render() {
