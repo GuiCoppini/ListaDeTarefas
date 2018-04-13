@@ -5,7 +5,9 @@ import * as APIservice from './APIservice'
 export default class TaskListForm extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {titulo: ''};
+    this.state = {
+      titulo: ''
+    };
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -18,6 +20,7 @@ export default class TaskListForm extends React.Component {
   handleSubmit(event) {
     event.preventDefault();
     APIservice.postLista(this.state, this.doOnSuccess, this.doOnError);
+    <Redirect to="/listas" />
   }
 
   doOnError(error) {
@@ -27,7 +30,8 @@ export default class TaskListForm extends React.Component {
 
   doOnSuccess(response) {
     alert('sussa');
-    // return <Redirect to="/listas" />
+    window.location.href = 'http://localhost:3000/listas';
+    // pior jeito possivel
   }
 
   render() {
