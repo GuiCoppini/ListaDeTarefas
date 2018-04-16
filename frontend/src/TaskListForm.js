@@ -20,7 +20,7 @@ export default class TaskListForm extends React.Component {
   handleSubmit(event) {
     event.preventDefault();
     APIservice.postLista(this.state, this.doOnSuccess, this.doOnError);
-    <Redirect to="/listas" />
+    // <Redirect to="/listas" />  # isso aqui nao funciona
   }
 
   doOnError(error) {
