@@ -29,8 +29,10 @@ export default class TaskListForm extends React.Component {
   }
 
   doOnSuccess(response) {
-    alert('sussa');
-    window.location.href = 'http://localhost:3000/listas';
+    alert('Lista adicionada!');
+    var fullURL = window.location;
+    var baseUrl = fullURL.protocol + "//" + fullURL.host
+    window.location.href = baseUrl+'/listas';
     // pior jeito possivel
   }
 
