@@ -6,10 +6,14 @@
 
 ---
 
-#### Para rodar o frontend (DEV):
+#### Para rodar o frontend (Enquanto desenvolve):
 1) Vá para a pasta `frontend`;
 2) Rode `yarn start` ou `npm start`;
 3) O frontend estará rodando na URL `http://localhost:3000/`.
+
+#### Para rodar o frontend (Última versão buildada):
+1) Rode o projeto (com `./gradlew bootRun` na pasta raiz);
+2) O frontend estará rodando na URL `http://localhost:8080/` e é capaz de se comunicar com o backend.
 
 ---
 
