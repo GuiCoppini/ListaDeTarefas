@@ -3,6 +3,8 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/ListaDeTarefas.iml" filepath="$PROJECT_DIR$/ListaDeTarefas.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/ListaDeTarefas_main.iml" filepath="$PROJECT_DIR$/.idea/modules/ListaDeTarefas_main.iml" group="ListaDeTarefas" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/ListaDeTarefas_test.iml" filepath="$PROJECT_DIR$/.idea/modules/ListaDeTarefas_test.iml" group="ListaDeTarefas" />
     </modules>
   </component>
 </project>
